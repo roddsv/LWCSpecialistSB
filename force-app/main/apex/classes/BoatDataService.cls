@@ -84,4 +84,14 @@ public with sharing class BoatDataService {
             ORDER BY CreatedDate DESC
         ];
     }
+
+    @AuraEnabled
+    public static String getBoatsByLocation(Decimal latitude, Decimal longitude, String boatTypeId) {
+        String databaseQuery = 'SELECT Name, Geolocation__Latitude__s, Geolocation__Longitude__s FROM Boat__c';
+        if (String.isNotBlank(boatTypeId)) {
+            databaseQuery += 'WHERE BoatType__c = :boatTypeId';
+        }
+        databaseQuery += 'WITH SECURITY_ENFORCED ORDER BY DISTANCE(Geolocation__c, GEOLOCATION(:latitude, :longitude), \'mi\' LIMIT 10';
+        return JSON.serialize(Database.query(databaseQuery));
+    }
 }
