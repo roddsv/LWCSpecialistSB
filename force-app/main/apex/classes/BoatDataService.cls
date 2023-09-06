@@ -85,7 +85,7 @@ public with sharing class BoatDataService {
         ];
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static String getBoatsByLocation(Decimal latitude, Decimal longitude, String boatTypeId) {
         String databaseQuery = 'SELECT Name, Geolocation__Latitude__s, Geolocation__Longitude__s FROM Boat__c';
         if (String.isNotBlank(boatTypeId)) {
@@ -93,5 +93,16 @@ public with sharing class BoatDataService {
         }
         databaseQuery += 'WITH SECURITY_ENFORCED ORDER BY DISTANCE(Geolocation__c, GEOLOCATION(:latitude, :longitude), \'mi\' LIMIT 10';
         return JSON.serialize(Database.query(databaseQuery));
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static String updateBoatList(Object Data) {
+        List<Boat__c> boatsForUpdate = (List<Boat__c>) JSON.deserialize(
+            JSON.serialize(data),
+            List<Boat__c>.class
+        );
+
+        update boatsForUpdate;
+        return 'Success: Boats updated successfully';
     }
 }
