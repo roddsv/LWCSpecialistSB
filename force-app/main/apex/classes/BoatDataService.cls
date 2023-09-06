@@ -61,4 +61,27 @@ public with sharing class BoatDataService {
         }
         return similarBoats;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<BoatType__c> getBoatTypes() {
+        return 
+        [
+            SELECT Name, Id 
+            FROM BoatType__c 
+            WITH SECURITY_ENFORCED
+            ORDER BY Name
+        ];
+    }
+
+    @AuraEnabled
+    public static List<BoatReview__c> getAllReviews(Id boatId) {
+        return
+        [
+            SELECT ID, Name, Comment__c, Rating__c, LastModifiedDate    , CreatedDate, CreatedBy.Name, CreatedBy.SmallPhotoUrl, CreatedBy.CompanyName
+            FROM BoatReview__c
+            WHERE Boat__c = :boatId
+            WITH SECURITY_ENFORCED
+            ORDER BY CreatedDate DESC
+        ];
+    }
 }
