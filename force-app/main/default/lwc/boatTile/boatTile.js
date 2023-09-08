@@ -21,4 +21,14 @@ export default class BoatTile extends LightningElement {
             return TILE_WRAPPER_UNSELECTED_CLASS;
         }
     }
+
+    selectBoat() {
+        this.selectedBoatId = this.boat.Id;
+        const boatselect = new CustomEvent('boatselect', {
+            detail: {
+                boatId: this.selectedBoatId
+            }
+        });
+        this.dispatchEvent(boatselect);
+    }
 }
