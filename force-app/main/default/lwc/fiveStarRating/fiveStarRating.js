@@ -28,4 +28,21 @@ export default class FiveStarRating extends LightningElement {
         this.loadScript();
         this.isRendered = true;
     }
+
+    loadScript() {
+        Promise.all([
+          loadScript(this, fivestar + '/rating.js'),
+          loadStyle(this, fivestar + '/rating.css')      
+        ]).then(() => {
+          this.initializeRating();
+        })
+        .catch(error => {
+          const toast = new ShowToastEvent({
+              title: ERROR_TITLE,
+              message: error.message,
+              variant: ERROR_VARIANT,
+          });
+          this.dispatchEvent(toast);
+        });
+    }
 }
