@@ -13,8 +13,7 @@ const SUCCESS_VARIANT = 'success';
 const ERROR_TITLE = 'Error';
 const ERROR_VARIANT = 'error';
 
-export default class BoarSearchResults extends LightningElement {
-
+export default class BoatSearchResults extends LightningElement {
     @api
     selectedBoatId;
     columns = [
@@ -29,7 +28,7 @@ export default class BoarSearchResults extends LightningElement {
     isLoading = false;
     @track
     draftValues = [];
-
+  
     @wire(MessageContext)
     messageContext;
 
@@ -42,13 +41,14 @@ export default class BoarSearchResults extends LightningElement {
             console.log(error)
         }
     }
-
+  
+    @api
     searchBoats(boatTypeId) {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
     }
-
+  
     @api
     async refresh() {
         this.isLoading = true;
@@ -57,20 +57,18 @@ export default class BoarSearchResults extends LightningElement {
         this.isLoading = false;
         this.notifyLoading(this.isLoading);
     }
-
+  
     updateSelectedTile(event) {
         this.selectedBoatId = event.detail.boatId;
         this.sendMessageService(this.selectedBoatId)
     }
-
+  
     sendMessageService(boatId) { 
         publish(this.messageContext, BOATMC, { recordId: boatId });
     }
-
+  
     handleSave(event) {
-        // notify loading
         const updatedFields = event.detail.draftValues;
-        // Update the records via Apex
         updateBoatList({data: updatedFields})
         .then(result => {
             const toast = new ShowToastEvent({
@@ -94,7 +92,7 @@ export default class BoarSearchResults extends LightningElement {
             
         });
     }
-
+    
     notifyLoading(isLoading) {
         if (isLoading) {
             this.dispatchEvent(new CustomEvent('loading'));
@@ -102,5 +100,4 @@ export default class BoarSearchResults extends LightningElement {
             this.dispatchEvent(CustomEvent('doneloading'));
         }        
     }
-
 }
