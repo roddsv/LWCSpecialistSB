@@ -32,4 +32,8 @@ export default class BoatDetailTabs extends LightningElement {
         labelFullDetails,
         labelPleaseSelectABoat,
     };
+
+    get detailsTabIconName() {
+        return this.wiredRecord.data ? 'utility:anchor' : null;
+    }
 }
