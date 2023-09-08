@@ -63,4 +63,8 @@ export default class BoarSearchResults extends LightningElement {
         this.sendMessageService(this.selectedBoatId)
     }
 
+    sendMessageService(boatId) { 
+        publish(this.messageContext, BOATMC, { recordId: boatId });
+    }
+
 }
