@@ -46,4 +46,27 @@ export default class BoatsNearMe extends LightningElement {
             });
         }
     }
+
+    createMapMarkers(boatData) {
+        const newMarkers = JSON.parse(boatData).map(boat => {
+            return {
+                title: boat.Name,
+                location: {
+                    Latitude: boat.Geolocation__Latitude__s,
+                    Longitude: boat.Geolocation__Longitude__s,
+                }
+            };
+        });
+
+        newMarkers.unshift({
+            title: LABEL_YOU_ARE_HERE,
+            icon: ICON_STANDARD_USER,
+            location: {
+                Latitude: this.latitude,
+                Longitude: this.longitude
+            }
+        });
+
+        this.mapMarkers = newMarkers;
+    }
 }
