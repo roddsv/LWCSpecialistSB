@@ -22,4 +22,14 @@ export default class SimilarBoats extends NavigationMixin(LightningElement) {
     
     @api
     similarBy;
+
+    @wire(getSimilarBoats, {boatId: '$boatId', similarBy: '$similarBy'})
+    similarBoats({ error, data }) {
+        if (data) {
+            this.relatedBoats = data;
+            this.error = undefined;
+        } else if (error) {
+            this.error = error;
+        }
+    }
 }
