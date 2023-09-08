@@ -16,4 +16,14 @@ export default class BoatSearch extends NavigationMixin {
         this.template.querySelector('c-boat-search-results').searchBoats(boatTypeId);
         this.handleDoneLoading();
     }
+
+    createNewBoat() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Boat__c',
+                actionName: 'new'
+            }
+        });        
+    }
 }
