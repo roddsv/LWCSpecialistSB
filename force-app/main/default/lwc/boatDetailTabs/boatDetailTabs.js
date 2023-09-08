@@ -3,7 +3,6 @@ import { NavigationMixin } from 'lightning/navigation';
 
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 
-
 import labelDetails from '@salesforce/label/c.Details';
 import labelReviews from '@salesforce/label/c.Reviews';
 import labelAddReview from '@salesforce/label/c.Add_Review';
@@ -17,7 +16,7 @@ const BOAT_FIELDS = [BOAT_ID_FIELD, BOAT_NAME_FIELD];
 import BOATMC from '@salesforce/messageChannel/BoatMessageChannel__c';
 import { subscribe, APPLICATION_SCOPE, MessageContext } from 'lightning/messageService';
 
-export default class BoatDetailTabs extends LightningElement {
+export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
 
     @wire(MessageContext)
     messageContext;
