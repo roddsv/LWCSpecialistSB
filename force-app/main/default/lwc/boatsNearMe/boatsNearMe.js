@@ -29,4 +29,12 @@ export default class BoatsNearMe extends LightningElement {
         
         this.isLoading = false;
     }
+
+    renderedCallback() {
+        if (!this.isRendered) {
+            this.getLocationFromBrowser();
+        } else {
+            this.isRendered = true;
+        }
+    }
 }
