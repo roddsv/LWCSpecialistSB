@@ -45,4 +45,21 @@ export default class FiveStarRating extends LightningElement {
           this.dispatchEvent(toast);
         });
     }
+
+    initializeRating() {
+        let domEl = this.template.querySelector('ul');
+        let maxRating = 5;
+        let self = this;
+        let callback = function (rating) {
+          self.editedValue = rating;
+          self.ratingChanged(rating);
+        };
+        this.ratingObj = window.rating(
+          domEl,
+          this.value,
+          maxRating,
+          callback,
+          this.readOnly
+        );
+      }
 }
