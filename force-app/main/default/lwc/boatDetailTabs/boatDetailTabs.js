@@ -59,4 +59,15 @@ export default class BoatDetailTabs extends LightningElement {
     connectedCallback() {
         this.subscribeMC();
     }
+
+    navigateToRecordViewPage() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.boatId,
+                objectApiName: "Boat__c",
+                actionName: "view"
+            },
+        });
+    }
 }
