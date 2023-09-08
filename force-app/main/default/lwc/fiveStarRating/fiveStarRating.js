@@ -61,5 +61,14 @@ export default class FiveStarRating extends LightningElement {
           callback,
           this.readOnly
         );
-      }
+    }
+
+    ratingChanged(rating) {     
+        const ratingchangeEvent = new CustomEvent('ratingchange', {
+          detail: {
+            rating: rating
+          }
+        });
+        this.dispatchEvent(ratingchangeEvent);    
+    }
 }
