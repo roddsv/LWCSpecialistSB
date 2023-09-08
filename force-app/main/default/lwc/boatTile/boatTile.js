@@ -15,8 +15,8 @@ export default class BoatTile extends LightningElement {
     }
 
     get tileClass() {
-        if (this.boat.id == this.selectedBoatId) {
-            return TILE_WRAPPER_SELECTED_CLASS
+        if (this.boat.Id == this.selectedBoatId) {
+            return TILE_WRAPPER_SELECTED_CLASS;
         } else {
             return TILE_WRAPPER_UNSELECTED_CLASS;
         }
