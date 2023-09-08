@@ -42,4 +42,12 @@ export default class BoarSearchResults extends LightningElement {
             console.log(error)
         }
     }
+
+    searchBoats(boatTypeId) {
+        this.isLoading = true;
+        this.notifyLoading(this.isLoading);
+        this.boatTypeId = boatTypeId;
+    }
+
+
 }
