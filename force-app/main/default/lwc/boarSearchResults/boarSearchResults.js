@@ -49,5 +49,14 @@ export default class BoarSearchResults extends LightningElement {
         this.boatTypeId = boatTypeId;
     }
 
+    @api
+    async refresh() {
+        this.isLoading = true;
+        this.notifyLoading(this.isLoading);      
+        await refreshApex(this.boats);
+        this.isLoading = false;
+        this.notifyLoading(this.isLoading);
+    }
+
 
 }
