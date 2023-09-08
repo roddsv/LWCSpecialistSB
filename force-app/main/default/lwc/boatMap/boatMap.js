@@ -43,4 +43,17 @@ export default class BoatMap extends LightningElement {
             this.mapMakers = [];
         }
     }
+
+    subscribeMC() {
+        if (this.subscription || this.recordId) {
+            return;
+        }
+
+        this.subscription = subscribe(
+            this.messageContext,
+            BOATMC,
+            (message) => { this.boatId = message.recordId },
+            { scope: APPLICATION_SCOPE }
+        );
+    }
 }
