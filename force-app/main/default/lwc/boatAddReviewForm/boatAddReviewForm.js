@@ -30,4 +30,11 @@ export default class BoatAddReviewForm extends LightningElement {
         this.rating = event.detail.rating;
     }
     
+    handleSubmit(event) {
+        event.preventDefault();
+        const fields = event.detail.fields;
+        fields.Rating__c = this.rating;
+        fields.Boat__c = this.boatId;        
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
+    }
 }
