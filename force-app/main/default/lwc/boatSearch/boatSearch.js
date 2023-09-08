@@ -6,4 +6,8 @@ export default class BoatSearch extends NavigationMixin {
     handleLoading() {
         this.isLoading = true;
     }
+
+    handleDoneLoading() {
+        this.isLoading = false;
+    }
 }
