@@ -70,4 +70,9 @@ export default class BoatDetailTabs extends LightningElement {
             },
         });
     }
+
+    handleReviewCreated() {
+        this.template.querySelector('lightning-tabset').activeTabValue = 'reviews';
+        this.template.querySelector('c-boat-reviews').refresh();
+    }
 }
