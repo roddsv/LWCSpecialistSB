@@ -36,4 +36,8 @@ export default class BoatDetailTabs extends LightningElement {
     get detailsTabIconName() {
         return this.wiredRecord.data ? 'utility:anchor' : null;
     }
+
+    get boatName() {
+        return getFieldValue(this.wiredRecord.data, BOAT_NAME_FIELD);
+    }
 }
