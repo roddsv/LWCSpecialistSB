@@ -32,4 +32,8 @@ export default class SimilarBoats extends NavigationMixin(LightningElement) {
             this.error = error;
         }
     }
+
+    get getTitle() {
+        return 'Similar boats by ' + this.similarBy;
+    }
 }
