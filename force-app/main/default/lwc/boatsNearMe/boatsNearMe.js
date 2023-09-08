@@ -37,4 +37,13 @@ export default class BoatsNearMe extends LightningElement {
             this.isRendered = true;
         }
     }
+
+    getLocationFromBrowser() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.latitude = position.coords.latitude;
+                this.longitude = position.coords.longitude;
+            });
+        }
+    }
 }
