@@ -35,5 +35,16 @@ export default class SimilarBoats extends NavigationMixin(LightningElement) {
   
     get noBoats() {
         return !(this.relatedBoats && this.relatedBoats.length > 0);
-      }
+    }
+
+    openBoatDetailPage(event) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: event.detail.boatId,
+                objectApiName: BOAT_OBJECT,
+                actionName: 'view'
+            },
+        });
+    }
 }
