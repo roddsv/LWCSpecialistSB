@@ -95,4 +95,12 @@ export default class BoarSearchResults extends LightningElement {
         });
     }
 
+    notifyLoading(isLoading) {
+        if (isLoading) {
+            this.dispatchEvent(new CustomEvent('loading'));
+        } else {
+            this.dispatchEvent(CustomEvent('doneloading'));
+        }        
+    }
+
 }
