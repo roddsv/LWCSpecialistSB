@@ -30,13 +30,12 @@ export default class BoatMap extends LightningElement {
     messageContext;
 
     @wire(getRecord, {recordId: '$boatId', fields: BOAT_FIELDS })
-    
     wiredRecord({error, data}) {
         if (data) {
             this.error = undefined;
             const longitude = data.fields.Geolocation__Longitude__s.value;
             const latitude = data.fields.Geolocation__Latitude__s.value;
-            this.uptadeMap(longitude, latitude);
+            this.updateMap(longitude, latitude);
         } else if (error) {
             this.error = error;
             this.boatId = undefined;
@@ -58,14 +57,14 @@ export default class BoatMap extends LightningElement {
     }
 
     connectedCallback() {
-        this.subscribeMC()
+        this.subscribeMC();
     };
 
     uptadeMap(Longitude, Latitude) {
-        this.mapMakers = [{location: {Latitude, Longitude}}];
+        this.mapMarkers = [{location: {Latitude, Longitude}}];
     }
 
-    getShowMap() {
-        return this.mapMakers.length > 0;
+    get showMap() {
+        return this.mapMarkers.length > 0;
     }
 }
