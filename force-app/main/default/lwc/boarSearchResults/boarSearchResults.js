@@ -67,4 +67,32 @@ export default class BoarSearchResults extends LightningElement {
         publish(this.messageContext, BOATMC, { recordId: boatId });
     }
 
+    handleSave(event) {
+        // notify loading
+        const updatedFields = event.detail.draftValues;
+        // Update the records via Apex
+        updateBoatList({data: updatedFields})
+        .then(result => {
+            const toast = new ShowToastEvent({
+                title: SUCCESS_TITLE,
+                message: MESSAGE_SHIP_IT,
+                variant: SUCCESS_VARIANT,
+            });
+            this.dispatchEvent(toast);
+            this.draftValues = [];
+            return this.refresh();
+        })
+        .catch(error => {
+            const toast = new ShowToastEvent({
+                title: ERROR_TITLE,
+                message: error.message,
+                variant: ERROR_VARIANT,
+            });
+            this.dispatchEvent(toast);
+        })
+        .finally(() => {
+            
+        });
+    }
+
 }
