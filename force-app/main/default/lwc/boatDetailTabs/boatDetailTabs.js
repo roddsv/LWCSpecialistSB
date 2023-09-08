@@ -55,4 +55,8 @@ export default class BoatDetailTabs extends LightningElement {
             { scope: APPLICATION_SCOPE }
         );
     }
+
+    connectedCallback() {
+        this.subscribeMC();
+    }
 }
