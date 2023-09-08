@@ -17,4 +17,19 @@ const BOAT_FIELDS = [BOAT_ID_FIELD, BOAT_NAME_FIELD];
 import BOATMC from '@salesforce/messageChannel/BoatMessageChannel__c';
 import { subscribe, APPLICATION_SCOPE, MessageContext } from 'lightning/messageService';
 
-export default class BoatDetailTabs extends LightningElement {}
+export default class BoatDetailTabs extends LightningElement {
+
+    @wire(MessageContext)
+    messageContext;
+    boatId;
+
+    @wire(getRecord, {recordId: '$boatId', fields: BOAT_FIELDS})
+    wiredRecord;
+    label = {
+        labelDetails,
+        labelReviews,
+        labelAddReview,
+        labelFullDetails,
+        labelPleaseSelectABoat,
+    };
+}
