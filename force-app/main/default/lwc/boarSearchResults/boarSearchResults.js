@@ -58,5 +58,9 @@ export default class BoarSearchResults extends LightningElement {
         this.notifyLoading(this.isLoading);
     }
 
+    updateSelectedTile(event) {
+        this.selectedBoatId = event.detail.boatId;
+        this.sendMessageService(this.selectedBoatId)
+    }
 
 }
