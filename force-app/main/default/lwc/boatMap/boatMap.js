@@ -56,4 +56,16 @@ export default class BoatMap extends LightningElement {
             { scope: APPLICATION_SCOPE }
         );
     }
+
+    connectedCallback() {
+        this.subscribeMC()
+    };
+
+    uptadeMap(Longitude, Latitude) {
+        this.mapMakers = [{location: {Latitude, Longitude}}];
+    }
+
+    getShowMap() {
+        return this.mapMakers.length > 0;
+    }
 }
