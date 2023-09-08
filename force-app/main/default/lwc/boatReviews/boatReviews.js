@@ -27,4 +27,20 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
     refresh() {
         this.getReviews();
     }
+
+    getReviews() {
+        if (this.boatId) {
+            this.isLoading = true;
+            getAllReviews({boatId: this.boatId}).then((result) => {
+                this.boatReviews = result;
+                this.error = undefined;
+            }).catch((error) => {
+                this.error = error;
+            }).finally(() => {
+                this.isLoading = false;
+            });
+        } else {
+            return;
+        }
+    }
 }
