@@ -22,4 +22,9 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
     get reviewsToShow() {
         return this.boatReviews !== undefined && this.boatReviews != null && this.boatReviews.length > 0;
     }
+
+    @api
+    refresh() {
+        this.getReviews();
+    }
 }
