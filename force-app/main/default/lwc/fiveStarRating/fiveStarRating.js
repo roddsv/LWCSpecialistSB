@@ -19,5 +19,13 @@ export default class FiveStarRating extends LightningElement {
 
     get starClass() {
         return this.readOnly ? READ_ONLY_CLASS : EDITABLE_CLASS;
-      }
+    }
+
+    renderedCallback() {
+        if (this.isRendered) {
+          return;
+        }
+        this.loadScript();
+        this.isRendered = true;
+    }
 }
