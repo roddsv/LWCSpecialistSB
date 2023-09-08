@@ -43,4 +43,18 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
             return;
         }
     }
+
+    navigateToRecord(event) { 
+        event.preventDefault();
+        event.stopPropagation();
+        let recordId = event.target.dataset.recordId;
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: recordId,
+                objectApiName: "User",
+                actionName: "view"
+            },
+        });
+    }
 }
