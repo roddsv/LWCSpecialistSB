@@ -40,4 +40,19 @@ export default class BoatDetailTabs extends LightningElement {
     get boatName() {
         return getFieldValue(this.wiredRecord.data, BOAT_NAME_FIELD);
     }
+
+    subscription = null;
+    
+    subscribeMC() {
+        if (this.subscription) {
+            return;
+        }
+    
+        this.subscription = subscribe(
+            this.messageContext,
+            BOATMC,
+            (message) => { this.boatId = message.recordId },
+            { scope: APPLICATION_SCOPE }
+        );
+    }
 }
